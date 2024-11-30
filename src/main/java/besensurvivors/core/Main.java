@@ -1,6 +1,7 @@
 package besensurvivors.core;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
@@ -14,6 +15,11 @@ public class Main extends Application  {
       primaryStage.setHeight(900);
       primaryStage.setTitle("BesenSurvivors");
       primaryStage.show();
+
+      SceneGenerator generator = new SceneGenerator();
+      Scene startWindowScene = generator.generateStartWindow();
+      primaryStage.setScene(startWindowScene);
+
     }
 
 
