@@ -8,13 +8,16 @@ import javafx.scene.layout.VBox;
 
 public class SceneGenerator {
   public Scene generateStartWindow() {
+      // Die Objekte erstellen, in denen alle Elemente sind
       VBox root = new VBox();
       Scene scene = new Scene(root);
 
+      // Label erstellen, der den Titel beinhaltet
       Label label = new Label("BesenSurvivors");
       label.setStyle("-fx-font-size: 37px;");
       root.getChildren().add(label);
 
+      // Button für das Spiel starten erstellen
       Button startGameButton = new Button();
       startGameButton.setText("Start Game");
       startGameButton.setPrefHeight(50);
@@ -26,7 +29,7 @@ public class SceneGenerator {
       endGameButton.setPrefWidth(200);
       root.getChildren().add(endGameButton);
 
-
+      // Den root (VBox) modifizieren
       root.setAlignment(Pos.CENTER);
       root.setStyle("-fx-background-color: #bb33ff");
     return scene;
