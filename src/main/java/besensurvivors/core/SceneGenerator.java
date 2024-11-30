@@ -23,6 +23,8 @@ public class SceneGenerator {
       startGameButton.setPrefHeight(50);
       startGameButton.setPrefWidth(200);
       root.getChildren().add(startGameButton);
+
+      // Button für das beenden des Spiels
       Button endGameButton = new Button();
       endGameButton.setText("Endgame");
       endGameButton.setPrefHeight(50);
