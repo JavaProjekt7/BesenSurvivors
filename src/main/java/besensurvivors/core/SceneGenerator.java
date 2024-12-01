@@ -4,14 +4,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.net.URL;
+
 public class SceneGenerator {
 
     public Scene generateStartWindow() {
@@ -94,10 +95,20 @@ public class SceneGenerator {
         Pane gameRoot = new Pane();
         Scene gameScene = new Scene(gameRoot, 800, 600); // Größe des Spiels
 
-        // Erstelle einen Charakter (blaues Rechteck)
-        Rectangle character = new Rectangle(50, 50, Color.BLUE);
+        // Lade das Bild und erstelle ein ImageView
+        //  getClass().getResource("/resources/character.png").toExternalForm();
+        Image characterImage = null;
+        try{
+             characterImage = new Image(new URL(System.getProperty("user.dir") + "/resources/character.png").toExternalForm());
+        } catch(Exception e){
+
+        }
+         // Stelle sicher, dass der Pfad korrekt ist
+        ImageView character = new ImageView(characterImage);
         character.setX(375); // Startposition X
         character.setY(275); // Startposition Y
+        character.setFitWidth(50); // Breite des Charakters anpassen
+        character.setFitHeight(50); // Höhe des Charakters anpassen
 
         gameRoot.getChildren().add(character);
 
@@ -113,8 +124,6 @@ public class SceneGenerator {
                 character.setX(character.getX() + 5); // nach rechts bewegen
             }
         });
-
-//hallo
 
         return gameScene;
     }
