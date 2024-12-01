@@ -4,15 +4,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.net.URL;
-
+import javafx.scene.layout.VBox;
 public class SceneGenerator {
 
     public Scene generateStartWindow() {
@@ -45,7 +44,7 @@ public class SceneGenerator {
         endGameButton.setOnAction(event -> ((Stage) endGameButton.getScene().getWindow()).close());
         settingsButton.setOnAction(event -> openSettingsWindow());
 
-        // Startgame-Button Aktion
+        // Startgame-Button
         startGameButton.setOnAction(event -> {
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             stage.setScene(generateGameWindow()); // Wechsel zur Spielszene
@@ -64,7 +63,6 @@ public class SceneGenerator {
         VBox settingsRoot = new VBox(20);
         settingsRoot.setAlignment(Pos.CENTER);
 
-        // Lautstärke-Label
         Label volumeLabel = new Label("Lautstärke:");
         volumeLabel.setStyle("-fx-font-size: 18px;");
 
@@ -89,26 +87,15 @@ public class SceneGenerator {
         settingsStage.show();
     }
 
-    // Methode für die Spielszene (Spielfeld)
+    // Spielfeld
     public Scene generateGameWindow() {
-        // Pane für die Spielfläche
         Pane gameRoot = new Pane();
         Scene gameScene = new Scene(gameRoot, 800, 600); // Größe des Spiels
 
-        // Lade das Bild und erstelle ein ImageView
-        //  getClass().getResource("/resources/character.png").toExternalForm();
-        Image characterImage = null;
-        try{
-             characterImage = new Image(new URL(System.getProperty("user.dir") + "/resources/character.png").toExternalForm());
-        } catch(Exception e){
-
-        }
-         // Stelle sicher, dass der Pfad korrekt ist
-        ImageView character = new ImageView(characterImage);
+        // Erstelle einen Charakter
+        Rectangle character = new Rectangle(50, 50, Color.BLUE);
         character.setX(375); // Startposition X
         character.setY(275); // Startposition Y
-        character.setFitWidth(50); // Breite des Charakters anpassen
-        character.setFitHeight(50); // Höhe des Charakters anpassen
 
         gameRoot.getChildren().add(character);
 
@@ -124,6 +111,8 @@ public class SceneGenerator {
                 character.setX(character.getX() + 5); // nach rechts bewegen
             }
         });
+
+//hallo
 
         return gameScene;
     }
