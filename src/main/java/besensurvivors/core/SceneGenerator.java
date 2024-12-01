@@ -4,11 +4,16 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-
-
+import javafx.scene.layout.VBox;
 public class SceneGenerator {
+
     public Scene generateStartWindow() {
         VBox root = new VBox(20);
         Scene scene = new Scene(root, 400, 300);
@@ -23,12 +28,11 @@ public class SceneGenerator {
         startGameButton.setPrefWidth(200);
         root.getChildren().add(startGameButton);
 
-        //Einstellungs button
+        // Einstellungs button
         Button settingsButton = new Button("Einstellungen");
         settingsButton.setPrefHeight(50);
         settingsButton.setPrefWidth(200);
         root.getChildren().add(settingsButton);
-
 
         // Button zum beenden des Spiels
         Button endGameButton = new Button();
@@ -37,9 +41,14 @@ public class SceneGenerator {
         endGameButton.setPrefWidth(200);
         root.getChildren().add(endGameButton);
 
-
         endGameButton.setOnAction(event -> ((Stage) endGameButton.getScene().getWindow()).close());
         settingsButton.setOnAction(event -> openSettingsWindow());
+
+        // Startgame-Button Aktion
+        startGameButton.setOnAction(event -> {
+            Stage stage = (Stage) startGameButton.getScene().getWindow();
+            stage.setScene(generateGameWindow()); // Wechsel zur Spielszene
+        });
 
         root.setAlignment(Pos.CENTER);
         root.setStyle("-fx-background-color: #bb33ff");
@@ -54,7 +63,6 @@ public class SceneGenerator {
         VBox settingsRoot = new VBox(20);
         settingsRoot.setAlignment(Pos.CENTER);
 
-
         // Lautstärke-Label
         Label volumeLabel = new Label("Lautstärke:");
         volumeLabel.setStyle("-fx-font-size: 18px;");
@@ -68,7 +76,6 @@ public class SceneGenerator {
         volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             double volume = newValue.doubleValue() / 100;
             System.out.println("Lautstärke: " + volume);
-
         });
 
         // Zurück-Button
@@ -79,5 +86,39 @@ public class SceneGenerator {
         Scene settingsScene = new Scene(settingsRoot, 300, 200);
         settingsStage.setScene(settingsScene);
         settingsStage.show();
+    }
+
+    // Methode für die Spielszene (Spielfeld)
+    public Scene generateGameWindow() {
+        // Pane für die Spielfläche
+        Pane gameRoot = new Pane();
+        Scene gameScene = new Scene(gameRoot, 800, 600); // Größe des Spiels
+
+        // Erstelle einen Charakter (blaues Rechteck)
+        Rectangle character = new Rectangle(50, 50, Color.BLUE);
+        character.setX(375); // Startposition X
+        character.setY(275); // Startposition Y
+
+        gameRoot.getChildren().add(character);
+
+        // Steuerung des Charakters
+        gameScene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.UP) {
+                character.setY(character.getY() - 5); // nach oben bewegen
+            } else if (event.getCode() == KeyCode.DOWN) {
+                character.setY(character.getY() + 5); // nach unten bewegen
+            } else if (event.getCode() == KeyCode.LEFT) {
+                character.setX(character.getX() - 5); // nach links bewegen
+            } else if (event.getCode() == KeyCode.RIGHT) {
+                character.setX(character.getX() + 5); // nach rechts bewegen
+            }
+        });
+
+        // Einfache Nachricht auf dem Spielfeld
+        Text message = new Text(10, 20, "Steuere den Charakter mit den Pfeiltasten!");
+        message.setFont(Font.font(18));
+        gameRoot.getChildren().add(message);
+
+        return gameScene;
     }
 }
