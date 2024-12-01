@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 public class SceneGenerator {
@@ -30,6 +31,10 @@ public class SceneGenerator {
       endGameButton.setPrefHeight(50);
       endGameButton.setPrefWidth(200);
       root.getChildren().add(endGameButton);
+      endGameButton.setOnAction(event -> ((Stage) endGameButton.getScene().getWindow()).close());
+
+
+
 
       // Den root (VBox) modifizieren
       root.setAlignment(Pos.CENTER);
