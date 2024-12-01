@@ -114,10 +114,7 @@ public class SceneGenerator {
             }
         });
 
-        // Einfache Nachricht auf dem Spielfeld
-        Text message = new Text(10, 20, "Steuere den Charakter mit den Pfeiltasten!");
-        message.setFont(Font.font(18));
-        gameRoot.getChildren().add(message);
+
 
         return gameScene;
     }
