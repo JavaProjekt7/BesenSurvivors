@@ -12,6 +12,8 @@ import javafx.scene.text.Text;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.ImageView;
+
 public class SceneGenerator {
 
     public Scene generateStartWindow() {
@@ -44,7 +46,7 @@ public class SceneGenerator {
         endGameButton.setOnAction(event -> ((Stage) endGameButton.getScene().getWindow()).close());
         settingsButton.setOnAction(event -> openSettingsWindow());
 
-        // Startgame-Button
+        // Startgame-Button Aktion
         startGameButton.setOnAction(event -> {
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             stage.setScene(generateGameWindow()); // Wechsel zur Spielszene
@@ -63,6 +65,7 @@ public class SceneGenerator {
         VBox settingsRoot = new VBox(20);
         settingsRoot.setAlignment(Pos.CENTER);
 
+        // Lautstärke-Label
         Label volumeLabel = new Label("Lautstärke:");
         volumeLabel.setStyle("-fx-font-size: 18px;");
 
@@ -87,12 +90,17 @@ public class SceneGenerator {
         settingsStage.show();
     }
 
-    // Spielfeld
+    // Methode für die Spielszene (Spielfeld)
     public Scene generateGameWindow() {
+        // Pane für die Spielfläche
         Pane gameRoot = new Pane();
         Scene gameScene = new Scene(gameRoot, 800, 600); // Größe des Spiels
 
-        // Erstelle einen Charakter
+        // Map als Hintergrund hinzufügen
+        Gamemap map = new Gamemap(); // Map-Objekt erstellen
+        gameRoot.getChildren().add(map); // Map als Hintergrund in die Szene einfügen
+
+        // Erstelle einen Charakter (blaues Rechteck)
         Rectangle character = new Rectangle(50, 50, Color.BLUE);
         character.setX(375); // Startposition X
         character.setY(275); // Startposition Y
@@ -111,8 +119,6 @@ public class SceneGenerator {
                 character.setX(character.getX() + 5); // nach rechts bewegen
             }
         });
-
-//hallo
 
         return gameScene;
     }
