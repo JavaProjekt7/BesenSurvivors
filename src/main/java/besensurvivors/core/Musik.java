@@ -5,19 +5,19 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.net.URL;
 
 public class Musik {
 
     private MediaPlayer mediaPlayer;
 
-
     public void playMusic(String filePath) {
         try {
-
-            Media media = new Media(new File(filePath).toURI().toString());
+            filePath = filePath.replace('\\', '/');
+            Media media = new Media(filePath);
             mediaPlayer = new MediaPlayer(media);
 
-            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+            //mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
             // Musik starten
