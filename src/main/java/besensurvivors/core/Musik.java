@@ -24,7 +24,7 @@ public class Musik {
             mediaPlayer.play();
             System.out.println("Musik gestartet: " + filePath);
         } catch (Exception e) {
-            System.err.println("Fehler beim Abspielen der Musik: " + e.getMessage());
+            System.err.println("Fehler" + e.getMessage());
         }
     }
 //aa
