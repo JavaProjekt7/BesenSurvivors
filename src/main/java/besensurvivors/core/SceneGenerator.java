@@ -14,9 +14,11 @@ import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
+
 public class SceneGenerator {
 
-    public Scene generateStartWindow() {
+    public Scene generateStartWindow(Main main) {
         VBox root = new VBox(20);
         Scene scene = new Scene(root, 400, 300);
 
@@ -48,6 +50,10 @@ public class SceneGenerator {
 
         // Startgame-Button Aktion
         startGameButton.setOnAction(event -> {
+            String currentDir = System.getProperty("user.dir");
+            main.getMusik().stopMusic();
+            main.getMusik().playMusic("file:///" + currentDir + "\\musik\\JavaxDaniel.mp3");
+
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             stage.setScene(generateGameWindow()); // Wechsel zur Spielszene
         });
