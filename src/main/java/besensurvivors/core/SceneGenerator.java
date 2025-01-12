@@ -12,6 +12,8 @@ import javafx.scene.text.Text;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.ImageView;
+
 public class SceneGenerator {
 
     public Scene generateStartWindow() {
@@ -94,6 +96,10 @@ public class SceneGenerator {
         Pane gameRoot = new Pane();
         Scene gameScene = new Scene(gameRoot, 800, 600); // Größe des Spiels
 
+        // Map als Hintergrund hinzufügen
+        Gamemap map = new Gamemap(); // Map-Objekt erstellen
+        gameRoot.getChildren().add(map); // Map als Hintergrund in die Szene einfügen
+
         // Erstelle einen Charakter (blaues Rechteck)
         Rectangle character = new Rectangle(50, 50, Color.BLUE);
         character.setX(375); // Startposition X
@@ -113,8 +119,6 @@ public class SceneGenerator {
                 character.setX(character.getX() + 5); // nach rechts bewegen
             }
         });
-
-//hallo
 
         return gameScene;
     }
