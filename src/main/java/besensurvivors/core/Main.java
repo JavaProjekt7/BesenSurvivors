@@ -36,7 +36,7 @@ public class Main extends Application {
         String currentDir = System.getProperty("user.dir");
         getMusik().playMusic("file:///" + currentDir + "\\musik\\IntroUwU.mp3");
     }
-
+//a
     public Musik getMusik() {
         return musik;
     }

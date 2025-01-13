@@ -20,7 +20,7 @@ public class Musik {
             //mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
-            // Musik starten
+            // Musik startena
             mediaPlayer.play();
             System.out.println("Musik gestartet: " + filePath);
         } catch (Exception e) {
