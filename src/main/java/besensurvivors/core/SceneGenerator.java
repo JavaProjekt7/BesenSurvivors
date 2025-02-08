@@ -115,13 +115,13 @@ public class SceneGenerator {
 
         // Steuerung des Charakters
         gameScene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.UP) {
+            if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
                 character.setY(character.getY() - 5); // nach oben bewegen
-            } else if (event.getCode() == KeyCode.DOWN) {
+            } else if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
                 character.setY(character.getY() + 5); // nach unten bewegen
-            } else if (event.getCode() == KeyCode.LEFT) {
+            } else if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
                 character.setX(character.getX() - 5); // nach links bewegen
-            } else if (event.getCode() == KeyCode.RIGHT) {
+            } else if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
                 character.setX(character.getX() + 5); // nach rechts bewegen
             }
         });
