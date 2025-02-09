@@ -17,11 +17,11 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 
 public class SceneGenerator {
-
+    //Schwerkraft
     private static final double GRAVITY = 0.5;  // Schwerkraft, die den Charakter wieder nach unten zieht
     private static final double JUMP_STRENGTH = -12;  // Stärke des Sprungs
-    private double velocityY = 0;  // Geschwindigkeit auf der Y-Achse, bestimmt wie schnell der Charakter fällt
-    private boolean isJumping = false;  // Boolean, um zu überprüfen, ob der Charakter in der Luft ist
+    private double velocityY = 0;  // wie schnell der Charakter fällt
+    private boolean isJumping = false;  //überprüft, ob der Charakter in der Luft ist
     private double gameWidth = 1584;  // Breite des Spielfeldes
     private double gameHeight = 840; // Höhe des Spielfeldes
 
