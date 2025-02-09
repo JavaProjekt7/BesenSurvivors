@@ -17,16 +17,15 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 
 public class SceneGenerator {
-    //Schwerkraft
+    // Schwerkraft
     private static final double GRAVITY = 0.5;  // Schwerkraft, die den Charakter wieder nach unten zieht
     private static final double JUMP_STRENGTH = -12;  // Stärke des Sprungs
     private double velocityY = 0;  // wie schnell der Charakter fällt
-    private boolean isJumping = false;  //überprüft, ob der Charakter in der Luft ist
+    private boolean isJumping = false;  // überprüft, ob der Charakter in der Luft ist
     private double gameWidth = 1584;  // Breite des Spielfeldes
     private double gameHeight = 840; // Höhe des Spielfeldes
 
     public Scene generateStartWindow(Main main) {
-        VBox root = new VBox(20);
         Scene scene = new Scene(root, 400, 300);
 
         Label label = new Label("BesenSurvivors");
@@ -118,7 +117,13 @@ public class SceneGenerator {
         character.setX(375); // Startposition X
         character.setY(gameHeight - character.getHeight()); // Startposition Y auf dem Boden
 
+        // Erstelle einen Gegner (rotes Rechteck)
+        Rectangle enemy = new Rectangle(50, 50, Color.RED);
+        enemy.setX(100); // Startposition X des Gegners
+        enemy.setY(gameHeight - enemy.getHeight()); // Startposition Y des Gegners
+
         gameRoot.getChildren().add(character);
+        gameRoot.getChildren().add(enemy);
 
         // Steuerung des Charakters
         gameScene.setOnKeyPressed(event -> {
@@ -158,6 +163,37 @@ public class SceneGenerator {
             character.setX(newX);
             character.setY(newY);
         });
+
+        // Gegner verfolgt den Charakter
+        // Ein einfacher Algorithmus, um den Spieler zu verfolgen (X und Y-Position)
+        Thread enemyAI = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(16);  // Ein bisschen Zeitverzögerung (60 FPS)
+
+                    // Berechne die Richtung, in die der Gegner sich bewegen muss
+                    double deltaX = character.getX() - enemy.getX();
+                    double deltaY = character.getY() - enemy.getY();
+
+                    // Bewege den Gegner in Richtung des Spielers
+                    double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                    if (distance != 0) {
+                        double moveX = deltaX / distance * 2; // Geschwindigkeit des Gegners (2 ist die Geschwindigkeit)
+                        double moveY = deltaY / distance * 2; // Geschwindigkeit des Gegners
+
+                        // Gegner bewegen
+                        enemy.setX(enemy.getX() + moveX);
+                        enemy.setY(enemy.getY() + moveY);
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        enemyAI.setDaemon(true);  // Setzen wir den Thread als Daemon-Thread, damit er automatisch gestoppt wird, wenn die Anwendung endet.
+        enemyAI.start();
 
         return gameScene;
     }
