@@ -26,6 +26,7 @@ public class SceneGenerator {
     private double gameHeight = 840; // Höhe des Spielfeldes
 
     public Scene generateStartWindow(Main main) {
+        VBox root = new VBox(20);
         Scene scene = new Scene(root, 400, 300);
 
         Label label = new Label("BesenSurvivors");
