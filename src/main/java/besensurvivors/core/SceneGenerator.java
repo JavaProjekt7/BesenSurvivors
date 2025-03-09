@@ -22,8 +22,8 @@ public class SceneGenerator {
     private static final double JUMP_STRENGTH = -12;  // Stärke des Sprungs
     private double velocityY = 0;  // wie schnell der Charakter fällt
     private boolean isJumping = false;  // überprüft, ob der Charakter in der Luft ist
-    private double gameWidth = 1584;  // Breite des Spielfeldes
-    private double gameHeight = 840; // Höhe des Spielfeldes
+    private double gameWidth = 1584/2;  // Breite des Spielfeldes
+    private double gameHeight = 840/2; // Höhe des Spielfeldes
 
     public Scene generateStartWindow(Main main) {
         VBox root = new VBox(20);
@@ -115,12 +115,12 @@ public class SceneGenerator {
 
         // Erstelle einen Charakter (blaues Rechteck)
         Rectangle character = new Rectangle(50, 50, Color.BLUE);
-        character.setX(375); // Startposition X
+        character.setX(375/2); // Startposition X
         character.setY(gameHeight - character.getHeight()); // Startposition Y auf dem Boden
 
         // Erstelle einen Gegner (rotes Rechteck)
         Rectangle enemy = new Rectangle(50, 50, Color.RED);
-        enemy.setX(100); // Startposition X des Gegners
+        enemy.setX(100/2); // Startposition X des Gegners
         enemy.setY(gameHeight - enemy.getHeight()); // Startposition Y des Gegners
 
         gameRoot.getChildren().add(character);

@@ -22,8 +22,8 @@ public class Main extends Application {
         // Das Start-Fenster konfigurieren
         windowRoot = primaryStage;
 
-        primaryStage.setWidth(1600);
-        primaryStage.setHeight(900);
+        primaryStage.setWidth(1600/2);
+        primaryStage.setHeight(900/2);
         primaryStage.setTitle("BesenSurvivors");
         primaryStage.show();
         // Den Scene-Generator initalisieren und die StartWindowScene generieren
