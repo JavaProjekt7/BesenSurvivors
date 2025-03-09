@@ -5,24 +5,34 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.nio.file.Path;
-
 public class Gamemap extends Pane {
+    private static final double MAP_WIDTH = 3000;  // Erweiterte Breite für mehr Bewegungsfreiheit
+    private static final double MAP_HEIGHT = 1000; // Höhe bleibt gleich
+
     public Gamemap() {
         // Hintergrundbild laden
         String currentDir = System.getProperty("user.dir");
-        //System.out.println(currentDir);
-
-        Image backgroundImage = new Image("file:///" + currentDir + "\\pictures\\map.png"); // Pfad zur Karte anpassen
+        Image backgroundImage = new Image("file:///" + currentDir + "\\pictures\\map.png");
         ImageView backgroundView = new ImageView(backgroundImage);
 
-        // Bild skalieren, um das Fenster auszufüllen
-        backgroundView.setFitWidth(Main.windowRoot.getWidth()); // Breite des Fensters
-        backgroundView.setFitHeight(Main.windowRoot.getHeight()); // Höhe des Fensters
+        // Map-Größe anpassen
+        backgroundView.setFitWidth(MAP_WIDTH);
+        backgroundView.setFitHeight(MAP_HEIGHT);
         backgroundView.setPreserveRatio(false);
 
-        // Bild als Hintergrund hinzufügen
+        // Hintergrundbild hinzufügen
         this.getChildren().add(backgroundView);
+    }
+
+    public static double getMapWidth() {
+        return MAP_WIDTH;
+    }
+
+    public static double getMapHeight() {
+        return MAP_HEIGHT;
+    }
+
+    public static void enableFullscreen(Stage stage) {
+        stage.setFullScreen(true);
     }
 }
